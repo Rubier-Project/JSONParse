@@ -44,7 +44,10 @@ def DictParse(data: dict):
                     d += f"\033[00m{key}: \033[91mfalse\033[00m, "
 
         if type(key) == str and type(val) == dict:
-            d += f"\033[00m{key}: \033[00m{DictParse(val)}"
+            if len(data.keys()) - num == 0:
+                d += f"\033[00m{key}: \033[00m{DictParse(val)} "
+            else:
+                d += f"\033[00m{key}: \033[00m{DictParse(val)}, "
 
     d += "\033[00m}"
 
