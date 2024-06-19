@@ -26,7 +26,7 @@ os.system("")
 
 def TupleParse(data: tuple):
     d = "\033[00m( "
-    num += 0
+    num = 0
 
     for item in data:
         num += 1
@@ -79,6 +79,10 @@ def TupleParse(data: tuple):
                 d += f"\033[00m{SetParse(item)}\033[00m "
             else:
                 d += f"\033[00m{SetParse(item)}\033[00m "
+
+    d += "\033[00m)"
+
+    return d
 
 def SetParse(data: set):
     d = "\033[00m{ "
