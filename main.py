@@ -1,5 +1,6 @@
 
 import os
+import json
 
 os.system("")
 
@@ -267,3 +268,21 @@ class Parse(object):
         d += "\033[00m}"
 
         return d
+
+    def ListParseFlex(self, data: list, flex: int = 2):
+        dy = str(json.dumps(data, indent=flex))
+        
+        for item in data:
+            if type(item) == int or type(item) == float:
+                dy = dy.replace(f"1", f"<YELLOW>1<WHITE>").replace(f"2", f"<YELLOW>2<WHITE>").replace(f"3", f"<YELLOW>3<WHITE>").replace(f"4", f"<YELLOW>4<WHITE>").replace(f"5", f"<YELLOW>5<WHITE>").replace(f"6", f"<YELLOW>6<WHITE>").replace(f"7", f"<YELLOW>7<WHITE>").replace(f"8", f"<YELLOW>8<WHITE>").replace(f"9", f"<YELLOW>9<WHITE>").replace(f"0", f"<YELLOW>0<WHITE>")
+
+            if type(item) == str:
+                dy = dy.replace(f"'{item}'", f"<GREEN>'{item}'<WHITE>").replace(f'"{item}"', f"<GREEN>'{item}'<WHITE>")
+            
+            if type(item) == bool:
+                dy = dy.replace("true", "<BLUE>true<WHITE>").replace("false", "<RED>false<WHITE>")
+
+            if type(item) == list:
+                dy = dy.replace(item, self.ListParseFlex(item, flex=flex))
+
+        return "\033[00m" + dy.replace("<BLUE>", "\033[94m").replace("<RED>", "\033[91m").replace("<GREEN>", "\033[32m").replace("<YELLOW>", "\033[93m").replace("<WHITE>", "\033[00m")
