@@ -102,6 +102,8 @@ class Parse(object):
 
         d += " \033[00m}"
 
+        return d
+
     def ListParse(self, data: list):
         d = "\033[00m[ "
         num = 0
