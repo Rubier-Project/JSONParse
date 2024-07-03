@@ -1,6 +1,6 @@
-
 import os
 import json
+import re
 
 os.system("")
 
@@ -288,3 +288,11 @@ class Parse(object):
                 dy = dy.replace(item, self.ListParseFlex(item, flex=flex))
 
         return "\033[00m" + dy.replace("<BLUE>", "\033[94m").replace("<RED>", "\033[91m").replace("<GREEN>", "\033[32m").replace("<YELLOW>", "\033[93m").replace("<WHITE>", "\033[00m")
+    
+    def JsonParse(self, data: dict, flex: int = 2):
+        ready = json.dumps(data, indent=flex)
+        ready = re.sub(r'\b(\d+)\b', r'\033[1;33m\1\033[m', ready)
+        ready = re.sub(r'"(.*?)"', r"\033[32m'\033[1;32m\1'\033[m", ready)
+        for _ in data.keys():
+            ready = ready.replace(f"'{str(_)}'", f"\033[00m{str(_)}")
+        return ready
