@@ -295,4 +295,6 @@ class Parse(object):
         ready = re.sub(r'"(.*?)"', r"\033[32m'\033[1;32m\1'\033[m", ready)
         for _ in data.keys():
             ready = ready.replace(f"'{str(_)}'", f"\033[00m{str(_)}")
+        
+        ready = ready.replace("'", "\033[32m'").replace(",", "\033[00m,").replace(":", "\033[00m:")
         return ready
